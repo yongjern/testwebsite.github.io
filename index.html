@@ -8,20 +8,31 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            margin: 20px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
         }
         #video-container {
-            margin-top: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
     </style>
 </head>
 <body>
-    <h1>Youtube 播放器</h1>
+    <h1 style="display: none;">Youtube 播放器</h1>
     <input type="text" id="video-url" placeholder="輸入 Youtube 影片網址">
     <button onclick="loadVideo()">播放</button>
     
     <div id="video-container">
-        <iframe id="player" width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+        <iframe id="player" src="" allowfullscreen></iframe>
     </div>
     
     <script>
@@ -35,7 +46,7 @@
             const url = document.getElementById("video-url").value;
             const videoId = extractVideoId(url);
             if (videoId) {
-                document.getElementById("player").src = `https://www.youtube.com/embed/${videoId}`;
+                document.getElementById("player").src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
             } else {
                 alert("請輸入有效的 Youtube 影片網址");
             }
