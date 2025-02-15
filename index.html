@@ -1,71 +1,31 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Youtube 播放器</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-        #controls {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 10px;
-            border-radius: 10px;
-        }
-        #controls input, #controls button {
-            font-size: 16px;
-            padding: 5px;
-        }
-        #video-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-    </style>
+    <title>時間展示</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="controls">
-        <input type="text" id="video-url" placeholder="輸入 Youtube 影片網址">
-        <button onclick="loadVideo()">播放</button>
+    <div class="time-container">
+        <p id="current-time"></p>
     </div>
-    
-    <div id="video-container">
-        <iframe id="player" src="" allowfullscreen></iframe>
-    </div>
-    
+
     <script>
-        function extractVideoId(url) {
-            const regex = /(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/;
-            const match = url.match(regex);
-            return match ? match[1] : null;
+        function updateTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('current-time').textContent = `${hours}:${minutes}:${seconds}`;
         }
-        
-        function loadVideo() {
-            const url = document.getElementById("video-url").value;
-            const videoId = extractVideoId(url);
-            if (videoId) {
-                document.getElementById("player").src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-            } else {
-                alert("請輸入有效的 Youtube 影片網址");
-            }
-        }
+
+        setInterval(updateTime, 1000); // 每秒更新
+        updateTime(); // 初始化時間
+    </script>
+</body>
+</html>
+
     </script>
 </body>
 </html>
