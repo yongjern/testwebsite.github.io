@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="time-container">
-        <p id="current-time"></p>
+        <p id="current-time">00:00:00</p>
     </div>
 
     <script>
@@ -20,12 +20,10 @@
             document.getElementById('current-time').textContent = `${hours}:${minutes}:${seconds}`;
         }
 
-        setInterval(updateTime, 1000); // 每秒更新
-        updateTime(); // 初始化時間
+        setInterval(updateTime, 1000);
+        updateTime();
     </script>
 </body>
 </html>
 
-    </script>
-</body>
 </html>
