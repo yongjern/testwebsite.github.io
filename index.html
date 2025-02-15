@@ -1,19 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Details</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Youtube 播放器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        #video-container {
+            margin-top: 20px;
+        }
+    </style>
 </head>
-<body class="gradient-background">
-    <div class="container">
-        <h1>Personal Details</h1>
-        <div id="details">
-            <!-- Personal details will be displayed here -->
-        </div>
+<body>
+    <h1>Youtube 播放器</h1>
+    <input type="text" id="video-url" placeholder="輸入 Youtube 影片網址">
+    <button onclick="loadVideo()">播放</button>
+    
+    <div id="video-container">
+        <iframe id="player" width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
     </div>
-    <script src="config.js"></script>
-    <script src="script.js"></script>
+    
+    <script>
+        function extractVideoId(url) {
+            const regex = /(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/;
+            const match = url.match(regex);
+            return match ? match[1] : null;
+        }
+        
+        function loadVideo() {
+            const url = document.getElementById("video-url").value;
+            const videoId = extractVideoId(url);
+            if (videoId) {
+                document.getElementById("player").src = `https://www.youtube.com/embed/${videoId}`;
+            } else {
+                alert("請輸入有效的 Youtube 影片網址");
+            }
+        }
+    </script>
 </body>
 </html>
